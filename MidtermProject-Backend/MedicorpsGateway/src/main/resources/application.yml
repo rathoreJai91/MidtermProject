@@ -1,0 +1,33 @@
+server:
+  port: 8191
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/medicorps/admin/**
+        - id: doctor-service
+          uri: lb://doctor-service
+          predicates:
+            - Path=/medicorps/doctor/**
+        - id: patient-service
+          uri: lb://patient-service
+          predicates:
+            - Path=/medicorps/patient/**
+        - id: appointment-service
+          uri: lb://appointment-service
+          predicates:
+            - Path=/medicorps/appointment/**
+        - id: testing-service
+          uri: lb://testing-service
+          predicates:
+            - Path=/medicorps/lab/**
+
